@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link rel="stylesheet" href="https://use.typekit.net/tvs3mun.css">
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<h1>Draw Online</h1>
+
+
+<button onclick="toggleMode(modes.drawing)">Toggle Drawing</button>
+<button onclick="clearCanvas()">Clear</button>
+<br />
+<div id="drawTools">
+    <label for="bColorPicker">BackgroundColor</label>
+    <input id="bColorPicker" name="bColorPicker" type="color" onchange="setBackgroundColor()" value="#ffffff" />
+    <br />
+
+    <label for="colorPicker">Color</label>
+    <input id="colorPicker" name="colorPicker" type="color" onchange="setColor()" />
+    <br />
+
+    <label for="sizePicker">Size</label>
+    <input id="sizePicker" name="sizePicker" type="range" onchange="setBrushSize()" min="1" max="150" />
+    <label for="sizePicker" id="sizeValue"></label>
+</div>
+
+
+<canvas id="c"></canvas>
+
+<script src="~/Scripts/fabric.min.js"></script>
+<script src="~/Scripts/Index.js"></script>
