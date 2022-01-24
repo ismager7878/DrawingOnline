@@ -45,22 +45,25 @@
             <div id="drawBoard">
                 <canvas id="c"></canvas>
             </div>
-            <div id="tools">
-                <button onclick="toggleMode(modes.drawing)">Toggle Drawing</button>
-                <button onclick="clearCanvas()">Clear</button>
-                <br />
-                <div id="drawTools">
-                    <label for="bColorPicker">BackgroundColor</label>
-                    <input id="bColorPicker" name="bColorPicker" type="color" onchange="setBackgroundColor()" value="#ffffff" />
-                    <br />
+            <div>
+                <div id="tools">
+                    <div id="canvasTools">
+                        <button onclick="toggleMode(modes.drawing)">Toggle Drawing</button>
+                        <button onclick="clearCanvas()">Clear</button>
+                    </div>
+                    <div id="drawTools">
+                        <label for="bColorPicker">BackgroundColor</label>
+                        <input id="bColorPicker" name="bColorPicker" type="color" onchange="setBackgroundColor()" value="#ffffff" />
+                        <br />
 
-                    <label for="colorPicker">Color</label>
-                    <input id="colorPicker" name="colorPicker" type="color" onchange="setColor()" />
-                    <br />
+                        <label for="colorPicker">Color</label>
+                        <input id="colorPicker" name="colorPicker" type="color" onchange="setColor()" />
+                        <br />
 
-                    <label for="sizePicker">Size</label>
-                    <input id="sizePicker" name="sizePicker" type="range" onchange="setBrushSize()" min="1" max="150" />
-                    <label for="sizePicker" id="sizeValue"></label>
+                        <label for="sizePicker">Size</label>
+                        <input id="sizePicker" name="sizePicker" type="range" onchange="setBrushSize()" min="1" max="150" />
+                        <label for="sizePicker" id="sizeValue"></label>
+                    </div>
                 </div>
             </div>
 

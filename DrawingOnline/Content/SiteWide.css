@@ -19,6 +19,7 @@ h3 {
 .site {
     display: flex;
     flex-direction: row;
+
 }
 
 .nav-list {
@@ -51,7 +52,7 @@ h3 {
 }
 
 #menuIcon {
-    margin-left: 10px;
+    margin-left: 40px;
     display: flex;
     height: 100px;
     align-items: center;
@@ -71,7 +72,7 @@ h3 {
     -o-transform: rotate(90deg);
 }
 
-    @media(min-width: 750px) {
+    @media(min-width: 960px) {
         #menuIcon{
         display:none;
     }
@@ -96,21 +97,21 @@ h3 {
     #icon-right {
         flex-basis: 100%;
         justify-content: right;
-        padding-right: 40px;
+        padding-right: 100px;
         margin:0;
     }
 
     #icon-left {
         flex-basis: 100%;
         justify-content: left;
-        padding-left: 40px;
+        padding-left: 100px;
         margin:0;
     }
         
 }
 
 .content{
-    margin:0 10px 0 10px;
+    width:100%;
 }
 
 

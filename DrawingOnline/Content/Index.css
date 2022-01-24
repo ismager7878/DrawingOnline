@@ -11,13 +11,17 @@
     align-items:center;
     justify-content:center;
 }
-#mainContent div{
+#mainContent > div{
     flex-grow:1;
     padding:0 20px;
 }
 
 #tools {
-    background-color:rgba(255, 255, 255, 0.1);
+    background-color:rgba(255, 255, 255, 0.2);
+    width:max-content;
+}
+#drawTools{
+    
 }
 
 @media(max-width: 1124px){
