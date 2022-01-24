@@ -1,7 +1,7 @@
 ﻿var menubot = document.getElementById('menuIcon');
 var exMenu = document.getElementById('coll')
 
-var x = window.matchMedia("(min-width: 750px)")
+var x = window.matchMedia("(min-width: 960px)")
 myFunction(x) // Call listener function at run time
 x.addListener(myFunction)
 

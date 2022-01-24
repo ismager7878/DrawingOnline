@@ -9,7 +9,36 @@ var sizeValue = document.getElementById('sizeValue')
 var bColorPicker = document.getElementById('bColorPicker')
 
 
+var x = window.matchMedia("(max-width: 1124px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction)
 
+function myFunction(x) {
+    var elements = document.getElementsByClassName('editBut');
+    if (x.matches) {
+        for (var i = 0; i < elements.length; i++) {
+            if (i == 0) {
+                elements[i].style.width = '100%'
+                console.log(elements[i].width);
+            } else {
+                elements[i].style.width = '100%'
+                console.log(elements[i].width);
+            }
+        }// If media query matches
+        console.log(elements[0].width);
+    } else {
+        for (var i = 0; i < elements.length; i++){
+            if (i == 0) {
+                elements[i].style.width = '80%'
+                console.log(elements[i].width);
+            } else {
+                elements[i].style.width = '30%'
+                console.log(elements[i].width);
+            }
+        }
+
+    }
+}
 
 const modes = {
     transform: 'transform',
@@ -51,22 +80,20 @@ function setBrushSize() {
     canvas.renderAll();
 }
 
-function toggleMode(mode) {
-    switch (mode) {
-        case modes.drawing:
-            canvas.freeDrawingBrush.color = colorPicker.value
-            canvas.freeDrawingBrush.width = sizePicker.value
-            currentMode = modes.drawing;
-            canvas.isDrawingMode = true;
-            canvas.renderAll();
-            break;
-        case modes.transform:
-            canvas.isDrawingMode = false;
-            currentMode = modes.transform
-            canvas.renderAll();
-            break;
+function toggleMode() {
+    if (currentMode == modes.drawing) {
+        document.getElementById('toggleBut').innerHTML = 'Enable Drawing'
+        canvas.isDrawingMode = false;
+        currentMode = modes.transform
+        canvas.renderAll();
+    } else {
+        document.getElementById('toggleBut').innerHTML = 'Enable Transform'
+        canvas.freeDrawingBrush.color = colorPicker.value
+        canvas.freeDrawingBrush.width = sizePicker.value
+        currentMode = modes.drawing;
+        canvas.isDrawingMode = true;
+        canvas.renderAll();
     }
-     
 }
 
 function reloadCanvas(canvas) {
@@ -88,6 +115,7 @@ function setEvents(canvas) {
 
     canvas.on('mouse:up', (event) => {
         mousePressed = false;
+        if (currentMode == modes.drawing)
         reloadCanvas(canvas);
     })
 
