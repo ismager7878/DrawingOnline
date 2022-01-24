@@ -10,6 +10,7 @@ var bColorPicker = document.getElementById('bColorPicker')
 
 
 
+
 const modes = {
     transform: 'transform',
     drawing: 'drawing'
@@ -19,8 +20,8 @@ const modes = {
 
 function initCanvas(id) {
     return new fabric.Canvas(id, {
-        width: 500,
-        height: 500,
+        width: 750,
+        height: 750,
         backgroundColor: 'white',
 
     })
@@ -95,8 +96,6 @@ function setEvents(canvas) {
 
 const canvas = initCanvas('c');
 toggleMode(modes.drawing); 
-
 var mousePressed = false;
-
-
 setEvents(canvas);
+

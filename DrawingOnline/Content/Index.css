@@ -1,2 +1,41 @@
-﻿body {
+﻿#c {
+    box-shadow: 3px 8px 15px #2b2a2a;
 }
+.canvas-container {
+    margin: 50px 0 0 auto;
+}
+
+
+#mainContent {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+#mainContent div{
+    flex-grow:1;
+    padding:0 20px;
+}
+
+#tools {
+    background-color:rgba(255, 255, 255, 0.1);
+}
+
+@media(max-width: 1124px){
+    #mainContent {
+        display: flex;
+        justify-content: center;
+        flex-direction:column
+    }
+
+        #mainContent div {
+            padding: 0;
+            width:750px;
+        }
+    .canvas-container{
+        margin:50px auto 20px auto;
+        
+    }
+}
+   
+
+

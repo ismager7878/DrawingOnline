@@ -1,17 +1,41 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<link href="~/Content/SiteWide.css" rel="stylesheet" />
+<div class="site">
+    <header>
+        <ul class="nav-list" id="coll">
+            <li class="icon" id="icon-left" style="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+                    <path id="Path_5" data-name="Path 5" d="M29.331.021A10.646,10.646,0,0,1,37.183,2.8a10.762,10.762,0,0,1,2.8,7.872h0V29.33A10.745,10.745,0,0,1,37.2,37.2a10.693,10.693,0,0,1-7.872,2.777H10.67A10.664,10.664,0,0,1,2.8,37.2,10.663,10.663,0,0,1,.021,29.33h0V10.67A10.663,10.663,0,0,1,2.8,2.8,10.664,10.664,0,0,1,10.67.021H29.331Zm-.519,9.131a3.159,3.159,0,0,0-4.475,0h0L23,10.51a.531.531,0,0,0,0,.739l.109.108.491.489,1,.991L25.8,14.045c.252.253.419.423.433.441a1.353,1.353,0,0,1,.36.919,1.317,1.317,0,0,1-1.319,1.319,1.255,1.255,0,0,1-.879-.36h0l-3.337-3.317a.435.435,0,0,0-.6,0h0l-9.53,9.53a3.6,3.6,0,0,0-1.059,2.477h0l-.12,4.735a.934.934,0,0,0,.26.679.951.951,0,0,0,.679.28h4.7a3.7,3.7,0,0,0,2.577-1.059h0L31.408,16.2a3.171,3.171,0,0,0,0-4.455h0Z" transform="translate(0)" fill="#209bba" />
+                </svg>
+            </li>
+            <li><h3>Home</h3></li>
+            <li><h3>Draw</h3></li>
+            <li><h3>My Drawings</h3></li>
+            <li><h3>Public Drawings</h3></li>
+            <li class="icon" id="icon-right" style=" ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+                    <g id="Iconly_Bold_Profile" data-name="Iconly/Bold/Profile" transform="translate(-4 -2)">
+                        <g id="Profile" transform="translate(4 2)">
+                            <path id="Path_6" data-name="Path 6" d="M16,26.348c8.677,0,16,1.41,16,6.85S24.629,40,16,40C7.325,40,0,38.59,0,33.15S7.371,26.348,16,26.348ZM16,0A10.583,10.583,0,1,1,5.412,10.582,10.547,10.547,0,0,1,16,0Z" transform="translate(0 0)" fill="#209bba" />
+                        </g>
+                    </g>
+                </svg>
+            </li>
+        </ul>
+    </header>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <content class="content">
+        <div id="menuIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="29.667" viewBox="0 0 43 29.667">
+                <g id="Icon_feather-menu" data-name="Icon feather-menu" transform="translate(-3 -7.5)">
+                    <path id="Path_13" data-name="Path 13" d="M4.5,18h40" transform="translate(0 4.333)" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_14" data-name="Path 14" d="M4.5,9h40" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    <path id="Path_15" data-name="Path 15" d="M4.5,27h40" transform="translate(0 8.667)" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                </g>
+            </svg>
+        </div>
+    </content>
+</div>
+<script src="~/Scripts/SiteWide.js"></script>

@@ -1,0 +1,119 @@
+﻿
+@import url("https://use.typekit.net/phy3jlj.css");
+body, button{
+    margin:0px;
+    font-family: noto-sans;
+    font-weight: 600;
+    color:white;
+}
+body {
+    background-color: #FFD500;
+}
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #209BBA;
+}
+
+
+.site {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-direction: column;
+    overflow: hidden;
+    
+}
+    .nav-list li {
+        width: max-content;
+        display: flex;
+        align-items: center;
+        justify-content:center
+    }
+    .nav-list li h3 {
+        padding: 0px 20px 0px 10px;
+    }
+
+.nav-list-transtion {
+    transition: max-width 0.2s ease-out;
+}
+
+.icon {
+    margin-left: 55px;
+    margin-top:28px;
+    margin-bottom:28px;
+}
+
+#menuIcon {
+    margin-left: 10px;
+    display: flex;
+    height: 100px;
+    align-items: center;
+    width: max-content;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+    #menuIcon:hover{
+        transform:scale(1.1) rotate(90deg);
+    }
+.menuRotated {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+}
+
+    @media(min-width: 750px) {
+        #menuIcon{
+        display:none;
+    }
+
+    .site {
+        flex-direction: column;
+    }
+    .nav-list {
+        flex-direction: row;
+        height: 100px;
+        max-width: 100000px;
+        display: flex;
+        transition: max-width 0.2s ease-out;
+    }
+        .nav-list li {
+            white-space:nowrap;
+        }
+            .nav-list li h3 {
+                padding: 30px;
+            }
+
+    #icon-right {
+        flex-basis: 100%;
+        justify-content: right;
+        padding-right: 40px;
+        margin:0;
+    }
+
+    #icon-left {
+        flex-basis: 100%;
+        justify-content: left;
+        padding-left: 40px;
+        margin:0;
+    }
+        
+}
+
+.content{
+    margin:0 10px 0 10px;
+}
+
+
+
+
+
