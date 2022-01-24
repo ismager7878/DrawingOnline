@@ -9,10 +9,33 @@ body, button{
 body {
     background-color: #FFD500;
 }
+
+a{
+    text-decoration:none;
+}
+
 h3 {
     font-size: 16px;
     font-weight: 600;
     color: #209BBA;
+    transition: transform 0.2s ease-out;
+    cursor:pointer;
+}
+    h3:hover {
+        transform:scale(1.05);
+        color: #75AAF0;
+        text-decoration: underline 2px;
+        text-underline-offset: 3px;
+    }
+
+input[type=range]{
+    cursor:pointer;
+}
+
+.current-page {
+    color: #75AAF0;
+    text-decoration: underline 2px;
+    text-underline-offset: 3px;
 }
 
 button {

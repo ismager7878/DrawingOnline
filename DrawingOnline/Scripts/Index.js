@@ -103,6 +103,11 @@ function reloadCanvas(canvas) {
 
 }
 
+function clearCanvas() {
+    canvas.clear();
+    setBackgroundColor();
+}
+
 function setEvents(canvas) {
     canvas.on('mouse:move', (event) => {
         if (mousePressed && currentMode == modes.drawing) {
