@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>teset</title>
     <link href="~/Content/SiteWide.css" rel="stylesheet" />
+    <link href="~/Content/PublicDrawings.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
-<body>
+<body onload="script()">
+    @model IEnumerable<DrawingOnline.Models.UserDrawingClass>
     <div class="site">
         <header>
             <ul class="nav-list" id="coll">
@@ -16,7 +19,12 @@
                     </svg>
                 </li>
                 <li><a href="@Url.Action("Index","Home")"><h3>Home</h3></a></li>
-                <li><a href="@Url.Action("Draw","Home")"><h3>Draw</h3></a></li>
+                <li>
+                    <a href="@Url.Action(
+                            actionName: "Draw",
+                            controllerName: "Home",
+                            routeValues: new RouteValueDictionary(new { edit = false }))"><h3>Draw</h3></a>
+                </li>
                 <li><a href="@Url.Action("MyDrawings","Home")"><h3>My Drawings</h3></a></li>
                 <li><a href="@Url.Action("PublicDrawings","Home")"><h3 class="current-page">Public Drawings</h3></a></li>
                 <li class="icon" id="icon-right" style=" ">
@@ -42,8 +50,21 @@
                     </g>
                 </svg>
             </div>
+            <div id="mainContent">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="drawingElement" id="@item.ID @item.UserID">
+                            @item.CanvasSVG
+                        </div>
+                    }
+                }
+            </div>
         </content>
     </div>
     <script src="~/Scripts/SiteWide.js"></script>
+    <script src="~/Scripts/StringToHTML.js"></script>
+    <script src="~/Scripts/PublicDrawings.js"></script>
 </body>
 </html>

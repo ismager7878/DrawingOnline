@@ -11,7 +11,12 @@
                 </svg>
             </li>
             <li><a href="@Url.Action("Index","Home")"><h3>Home</h3></a></li>
-            <li><a href="@Url.Action("Draw","Home")"><h3>Draw</h3></a></li>
+            <li>
+                <a href="@Url.Action(
+                            actionName: "Draw",
+                            controllerName: "Home",
+                            routeValues: new RouteValueDictionary(new { edit = false }))"><h3>Draw</h3></a>
+            </li>
             <li><a href="@Url.Action("MyDrawings","Home")"><h3 class="current-page">My Drawings</h3></a></li>
             <li><a href="@Url.Action("PublicDrawings","Home")"><h3>Public Drawings</h3></a></li>
             <li class="icon" id="icon-right" style=" ">

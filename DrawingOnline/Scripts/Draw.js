@@ -1,7 +1,7 @@
 ﻿/// <reference path="jquery-3.4.1.slim.js" />
 console.log('hello');
 
-
+var finalCanvas;
 
 var colorPicker = document.getElementById('colorPicker')
 var sizePicker = document.getElementById('sizePicker')
@@ -40,12 +40,16 @@ function myFunction(x) {
     }
 }
 
+var exitPop = document.getElementById('exitPop');
+
+exitPop.addEventListener('click', () => {
+    exitPop.parentElement.parentElement.style.display = 'none';
+})
+
 const modes = {
     transform: 'transform',
     drawing: 'drawing'
 }
-
-
 
 function initCanvas(id) {
     return new fabric.Canvas(id, {
@@ -121,14 +125,26 @@ function setEvents(canvas) {
     canvas.on('mouse:up', (event) => {
         mousePressed = false;
         if (currentMode == modes.drawing)
-        reloadCanvas(canvas);
+            reloadCanvas(canvas);
+        saveCanvas(canvas);
     })
 
 }
+
 
 
 const canvas = initCanvas('c');
 toggleMode(modes.drawing); 
 var mousePressed = false;
 setEvents(canvas);
+
+
+
+function saveCanvas(canvas){
+    finalCanvas = {
+        canvas: canvas
+    }
+}
+
+
 

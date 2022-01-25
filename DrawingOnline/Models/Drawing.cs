@@ -14,12 +14,6 @@ namespace DrawingOnline.Models
     
     public partial class Drawing
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Drawing()
-        {
-            this.Drawings1 = new HashSet<Drawing>();
-        }
-    
         public int ID { get; set; }
         public string Name { get; set; }
         public string Canvas { get; set; }
@@ -27,10 +21,8 @@ namespace DrawingOnline.Models
         public Nullable<int> RemixedID { get; set; }
         public Nullable<int> UserID { get; set; }
         public bool Publicity { get; set; }
+        public string CanvasSVG { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Drawing> Drawings1 { get; set; }
-        public virtual Drawing Drawing1 { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -2,9 +2,9 @@
     ViewBag.Title = "Home Page";
 }
 <link rel="stylesheet" href="https://use.typekit.net/tvs3mun.css">
-<link href="~/Content/Index.css" rel="stylesheet" />
+<link href="~/Content/Draw.css" rel="stylesheet" />
 <link href="~/Content/SiteWide.css" rel="stylesheet" />
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <div class="site">
     <header>
@@ -15,7 +15,12 @@
                 </svg>
             </li>
             <li><a href="@Url.Action("Index","Home")"><h3>Home</h3></a></li>
-            <li><a href="@Url.Action("Draw","Home")"><h3 class="current-page">Draw</h3></a></li>
+            <li>
+                <a href="@Url.Action(
+                            actionName: "Draw",
+                            controllerName: "Home",
+                            routeValues: new RouteValueDictionary(new { edit = false }))"><h3>Draw</h3></a>
+            </li>
             <li><a href="@Url.Action("MyDrawings","Home")"><h3>My Drawings</h3></a></li>
             <li><a href="@Url.Action("PublicDrawings","Home")"><h3>Public Drawings</h3></a></li>
             <li class="icon" id="icon-right">
@@ -53,33 +58,122 @@
                         <div style="width:70%" class="editBut"><button onclick="toggleMode()" id="toggleBut">Enable Transform</button></div>
                         <div style="width:30%" class="editBut"><button onclick="clearCanvas()">Clear</button></div>
                     </div>
-                        <ul id="drawTools">
-                            <li>
-                                <label for="bColorPicker">Background Color</label>
-                                <input class="colorChanger" id="bColorPicker" name="bColorPicker" type="color" onchange="setBackgroundColor()" value="#ffffff" />
-                            </li>
-                            <li>
-                                <label for="colorPicker">Stroke Color</label>
-                                <input class="colorChanger" id="colorPicker" name="colorPicker" type="color" onchange="setColor()" />
-                            </li>
-                            <li>
-                                <label for="sizePicker">Size</label>
-                                <input id="sizePicker" name="sizePicker" type="range" onchange="setBrushSize()" min="1" max="100" />
-                                <label for="sizePicker" id="sizeValue"></label>
-                            </li>
-                        </ul>
+                    <ul id="drawTools">
+                        <li>
+                            <label for="bColorPicker">Background Color</label>
+                            <input class="colorChanger" id="bColorPicker" name="bColorPicker" type="color" onchange="setBackgroundColor()" value="#ffffff" />
+                        </li>
+                        <li>
+                            <label for="colorPicker">Stroke Color</label>
+                            <input class="colorChanger" id="colorPicker" name="colorPicker" type="color" onchange="setColor()" />
+                        </li>
+                        <li>
+                            <label for="sizePicker">Size</label>
+                            <input id="sizePicker" name="sizePicker" type="range" onchange="setBrushSize()" min="1" max="100" />
+                            <label for="sizePicker" id="sizeValue"></label>
+                        </li>
+                    </ul>
+                    <div id="saveTolls">
+                        <div id="saveBut"><button id="quickSave">Save</button></div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </content>
-
-
-
-
+    <div id="addPopUp">
+        <div id="popHeader">
+            <h2>Save As</h2>
+            <svg id="exitPop" xmlns="http://www.w3.org/2000/svg" width="36" height="31.5" viewBox="0 0 36 31.5">
+                <path id="Icon_awesome-window-close" data-name="Icon awesome-window-close" d="M32.625,2.25H3.375A3.376,3.376,0,0,0,0,5.625v24.75A3.376,3.376,0,0,0,3.375,33.75h29.25A3.376,3.376,0,0,0,36,30.375V5.625A3.376,3.376,0,0,0,32.625,2.25ZM26.747,22.676a.866.866,0,0,1,0,1.223L23.9,26.747a.866.866,0,0,1-1.223,0L18,22.029l-4.676,4.718a.866.866,0,0,1-1.223,0L9.253,23.9a.866.866,0,0,1,0-1.223L13.971,18,9.253,13.324a.866.866,0,0,1,0-1.223L12.1,9.253a.866.866,0,0,1,1.223,0L18,13.971l4.676-4.718a.866.866,0,0,1,1.223,0L26.747,12.1a.866.866,0,0,1,0,1.223L22.029,18Z" transform="translate(0 -2.25)" fill="#209bba" />
+            </svg>
+        </div>
+        <div>
+            <label for="nameIn">Name:</label>
+            <br />
+            <input id="nameIn" name="nameIn" type="text" placeholder="Enter name..." />
+        </div>
+        <div>
+            <label for="publicIn">Public:</label>
+            <input id="publicIn" name="publicIn" type="checkbox" />
+        </div>
+        <button id="saveAsBut">Save As</button>
+    </div>
 </div>
 
-
 <script src="~/Scripts/fabric.min.js"></script>
-<script src="~/Scripts/Index.js"></script>
+<script src="~/Scripts/Draw.js"></script>
 <script src="~/Scripts/SiteWide.js"></script>
+<script src="~/Scripts/lzw_encoder.js"></script>
+<script type="text/javascript">
+    var loadedID;
+    var remixed;
+    var remixedID;
+    var popUpSave = document.getElementById('addPopUp')
+
+    $(function () {
+        $("#quickSave").click(function () {
+            var userDrawings = JSON.parse(@Html.Raw(Json.Encode(@ViewBag.Sider)));
+            console.log(userDrawings);
+            var update = false;
+
+            for (var i = 0; i < userDrawings.length; i++) {
+                if (userDrawings[i].ID == loadedID) {
+                    update = true;
+                    break;
+                }
+            }
+
+            if (update) {
+                //        $.ajax({
+                //        type: "POST",
+                //        url: "/Home/UpdateLike",
+                //        data: JSON.stringify(randSite),
+                //        contentType: "application/json; charset=utf-8",
+                //        dataType: "json",
+                //        success: function (r) {
+                //        },
+                //        failure: function (response) {
+                //            alert(response.responseText);
+                //        },
+                //        error: function (response) {
+                //            alert(response.responseText);
+                //        }
+                //    });
+            } else {
+                popUpSave.style.display = 'flex';
+            }
+        });
+    });
+
+    $("#saveAsBut").click(function () {
+        var drawing = new Object();
+
+        drawing.Name = $('#nameIn').val();
+        console.log(JSON.stringify(finalCanvas.canvas))
+        console.log(lzw_encode(JSON.stringify(finalCanvas.canvas)))
+        drawing.Canvas = lzw_encode(JSON.stringify(finalCanvas.canvas));
+        drawing.Remixed = remixed
+        drawing.RemixedID = remixedID
+        drawing.Publicity = document.getElementById('publicIn').checked;
+        drawing.CanvasSVG = finalCanvas.canvas.toSVG()
+
+        console.log($('#publicIn').val());
+        $.ajax({
+            type: "POST",
+            url: "/Home/AddDrawing",
+            data: JSON.stringify(drawing),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                popUpSave.style.display = 'none';
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+
+    });
+</script>
