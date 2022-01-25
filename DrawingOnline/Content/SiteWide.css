@@ -1,10 +1,10 @@
 ﻿
 @import url("https://use.typekit.net/phy3jlj.css");
-body, button{
-    margin:0px;
+body, button, input[type=text] {
+    margin: 0px;
     font-family: noto-sans;
     font-weight: 600;
-    color:white;
+    color: white;
 }
 body {
     background-color: #FFD500;
@@ -32,11 +32,23 @@ input[type=range]{
     cursor:pointer;
 }
 
-.current-page {
-    color: #75AAF0;
-    text-decoration: underline 2px;
-    text-underline-offset: 3px;
+input[type=text] {
+    cursor: pointer;
+    border: solid 2px #209BBA;
+    border-radius:10px;
+    text-align:center;
+    font-size:16px;
+    padding:5px 0;
+    color: black;
 }
+
+
+
+    .current-page {
+        color: #75AAF0;
+        text-decoration: underline 2px;
+        text-underline-offset: 3px;
+    }
 
 button {
     background-color: #209BBA;

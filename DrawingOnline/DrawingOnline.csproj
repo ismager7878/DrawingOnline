@@ -156,6 +156,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>DrawingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserDrawingClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,11 +165,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Index.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\SiteWide.css" />
+    <Content Include="Content\Draw.css" />
+    <Content Include="Content\PublicDrawings.css" />
     <Content Include="Models\DrawingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DrawingModel.edmx</DependentUpon>
@@ -179,6 +177,11 @@
       <DependentUpon>DrawingModel.edmx</DependentUpon>
       <LastGenOutput>DrawingModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\lzw_encoder.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\SiteWide.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\DrawingModel.edmx">
@@ -190,7 +193,7 @@
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fabric.min.js" />
-    <Content Include="Scripts\Index.js" />
+    <Content Include="Scripts\Draw.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -201,7 +204,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PublicDrawings.js" />
     <Content Include="Scripts\SiteWide.js" />
+    <Content Include="Scripts\StringToHTML.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

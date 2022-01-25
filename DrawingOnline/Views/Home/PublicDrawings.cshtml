@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>teset</title>
     <link href="~/Content/SiteWide.css" rel="stylesheet" />
+    <link href="~/Content/PublicDrawings.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
-<body>
+<body onload="script()">
+    @model IEnumerable<DrawingOnline.Models.UserDrawingClass>
     <div class="site">
         <header>
             <ul class="nav-list" id="coll">
@@ -42,8 +45,21 @@
                     </g>
                 </svg>
             </div>
+            <div id="mainContent">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="drawingElement" id="@item.ID @item.UserID">
+                            @item.CanvasSVG
+                        </div>
+                    }
+                }
+            </div>
         </content>
     </div>
     <script src="~/Scripts/SiteWide.js"></script>
+    <script src="~/Scripts/StringToHTML.js"></script>
+    <script src="~/Scripts/PublicDrawings.js"></script>
 </body>
 </html>

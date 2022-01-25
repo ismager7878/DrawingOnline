@@ -16,6 +16,7 @@
           <Property Name="RemixedID" Type="int" />
           <Property Name="UserID" Type="int" />
           <Property Name="Publicity" Type="bit" Nullable="false" />
+          <Property Name="CanvasSVG" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -36,18 +37,6 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Tagline" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK_Drawings_Drawings1">
-          <End Role="Drawings" Type="Self.Drawings" Multiplicity="0..1" />
-          <End Role="Drawings1" Type="Self.Drawings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drawings">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Drawings1">
-              <PropertyRef Name="RemixedID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Drawings_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Drawings" Type="Self.Drawings" Multiplicity="*" />
@@ -64,10 +53,6 @@
           <EntitySet Name="Drawings" EntityType="Self.Drawings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Drawings_Drawings1" Association="Self.FK_Drawings_Drawings1">
-            <End Role="Drawings" EntitySet="Drawings" />
-            <End Role="Drawings1" EntitySet="Drawings" />
-          </AssociationSet>
           <AssociationSet Name="FK_Drawings_Users" Association="Self.FK_Drawings_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Drawings" EntitySet="Drawings" />
@@ -89,8 +74,7 @@
           <Property Name="RemixedID" Type="Int32" />
           <Property Name="UserID" Type="Int32" />
           <Property Name="Publicity" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Drawings1" Relationship="Self.FK_Drawings_Drawings1" FromRole="Drawings" ToRole="Drawings1" />
-          <NavigationProperty Name="Drawing1" Relationship="Self.FK_Drawings_Drawings1" FromRole="Drawings1" ToRole="Drawings" />
+          <Property Name="CanvasSVG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Drawings_Users" FromRole="Drawings" ToRole="Users" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -113,18 +97,6 @@
           <Property Name="Tagline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Drawings" Relationship="Self.FK_Drawings_Users" FromRole="Users" ToRole="Drawings" />
         </EntityType>
-        <Association Name="FK_Drawings_Drawings1">
-          <End Role="Drawings" Type="Self.Drawing" Multiplicity="0..1" />
-          <End Role="Drawings1" Type="Self.Drawing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drawings">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Drawings1">
-              <PropertyRef Name="RemixedID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Drawings_Users">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
           <End Role="Drawings" Type="Self.Drawing" Multiplicity="*" />
@@ -141,10 +113,6 @@
           <EntitySet Name="Drawings" EntityType="Self.Drawing" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_Drawings_Drawings1" Association="Self.FK_Drawings_Drawings1">
-            <End Role="Drawings" EntitySet="Drawings" />
-            <End Role="Drawings1" EntitySet="Drawings" />
-          </AssociationSet>
           <AssociationSet Name="FK_Drawings_Users" Association="Self.FK_Drawings_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Drawings" EntitySet="Drawings" />
@@ -166,6 +134,7 @@
                 <ScalarProperty Name="RemixedID" ColumnName="RemixedID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Publicity" ColumnName="Publicity" />
+                <ScalarProperty Name="CanvasSVG" ColumnName="CanvasSVG" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
