@@ -9,3 +9,31 @@
 .drawingElement {
     box-shadow: 3px 8px 15px #2b2a2a;
 }
+.elementButton{
+    transform: scale(1.01);
+}
+.elementButton:hover {
+    transform: scale(1.02);
+}
+.bottomOverlay {
+    padding: 1em 0;
+    width: 100%;
+    background-color: #ffbc00;
+    color: #209BBA;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .bottomOverlay > div {
+        margin: 0 1em;
+        width:100%;
+    }
+#center{
+    text-align:center;
+}
+#right{
+    text-align:right;
+}

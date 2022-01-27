@@ -1,13 +1,14 @@
 ﻿
 @import url("https://use.typekit.net/phy3jlj.css");
-body, button, input[type=text] {
+body, button, input[type=text], a {
     margin: 0px;
     font-family: noto-sans;
     font-weight: 600;
     color: white;
 }
 body {
-    background-color: #FFD500;
+    background: rgb(255,213,0);
+    background: linear-gradient(90deg, rgba(255,213,0,1) 0%, rgba(224,176,0,1) 100%);
 }
 
 a{
@@ -63,6 +64,19 @@ button {
         opacity: .8;
         
     }
+.button {
+    background-color: #209BBA;
+    border-radius: 50px;
+    border: none;
+    padding: 0.5em 1em;
+    transition: transform opacity 0.2s ease-out;
+    cursor: pointer;
+}
+
+    .button:hover {
+        transform: scale(1.05);
+        opacity: .8;
+    }
 
 ul {
     margin: 0;
@@ -99,14 +113,35 @@ ul {
 
 .icon {
     margin-left: 55px;
-    margin-top:28px;
-    margin-bottom:28px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+    
 }
-
-#menuIcon {
+.menuIcon {
+    transition: transform 0.2s ease-out;
+}
+    .menuIcon:hover {
+        transform: scale(1.05);
+        color: #75AAF0;
+        text-decoration: underline 2px;
+        text-underline-offset: 3px;
+    }
+#smallTitle {
+    position: relative;
+    right: 50%;
+    transform: translate(50%, 0);
+}
+    #smallTitle > h3 {
+        font-size: 30px;
+    }
+#smallTop {
     margin-left: 40px;
     display: flex;
     height: 100px;
+    justify-content: space-between;
+}
+#menuIcon {
+    display:flex;
     align-items: center;
     width: max-content;
     -webkit-transition: all 0.3s ease-in-out;
@@ -127,7 +162,7 @@ ul {
 }
 
     @media(min-width: 960px) {
-        #menuIcon{
+        #smallTop{
         display:none;
     }
 
@@ -175,13 +210,13 @@ ul {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0);
+    background: rgb(225 177 0);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #209BBA;
-    border: solid 4px #FFD500;
+    border: solid 4px #e1b100;
     border-radius: 7.5px;
 }
 

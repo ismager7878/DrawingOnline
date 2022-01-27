@@ -1,0 +1,54 @@
+﻿footer {
+    position:absolute;
+    bottom:0px;
+    left:0px;
+}
+
+.button{
+    margin-top:20px;
+    font-size:24px;
+}
+
+h1 {
+    font-family: Epicursive;
+    font-size:55px;
+    margin-bottom:10px;
+}
+#mainContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+}
+
+#mainContent > div{
+    flex-basis:100%;
+    text-align:center;
+}
+#middleSection {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 0 213px 0;
+    gap: 1em;
+    max-width: 387px;
+}
+.human {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+@media(max-width:1130px) {
+    .human {
+        display: none;
+    }
+    
+}
+
+
+
+

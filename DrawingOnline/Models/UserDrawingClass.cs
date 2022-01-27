@@ -14,7 +14,7 @@ namespace DrawingOnline.Models
         public Nullable<int> RemixedID { get; set; }
         public Nullable<int> UserID { get; set; }
         public bool Publicity { get; set; }
-
         public string CanvasSVG { get; set; }
+
     }
 }

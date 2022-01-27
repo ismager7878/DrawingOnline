@@ -1,0 +1,80 @@
+﻿
+a {
+    color: #632FEF
+}
+
+#overlay {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    #overlay > * {
+        display: flex;
+        background-color: rgba(255,255,255,0.1);
+        padding: 60px 60px 80px 0;
+    }
+
+        #overlay > * > * {
+            width: 100%;
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1em;
+        }
+
+#exitPop {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#setUpInfo > * {
+    max-width: 330px;
+    margin-left: 60px;
+}
+
+#setUpInfo h1 {
+    margin: 0;
+}
+
+#setUpInfo p {
+    margin: 0;
+}
+
+#setUpInfo > * > * {
+    display: flex;
+    align-items: flex-end;
+    gap: 1em;
+}
+
+    #setUpInfo > * > * > * {
+        width: 100%;
+    }
+
+#setUpInfo input[type=text] {
+    border: none;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 0;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+    #setUpInfo input[type=text]::placeholder {
+        color: white;
+    }
+
+#setUpInfo button {
+    height: 48px;
+}
+@media(max-width:960px){
+    #svgIllu{
+        display:none;
+    }
+}

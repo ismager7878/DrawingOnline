@@ -1,0 +1,64 @@
+﻿#mainContent{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+#profileBox{
+    background-color: rgba(255,255,255,0.1);
+    margin-top:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    gap:20px;
+}
+    #profileBox > * {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width: 432px;
+        height: 568px;
+        flex-direction:column;
+    }
+
+
+#drawInfo {
+}
+#drawInfo > div{
+    display:flex;
+    align-items:center;
+    gap: 1em;
+    
+}
+#profileInfo{
+    display:flex;
+    justify-items:center;
+    flex-direction:column;
+}
+
+#userInfo > div {
+    background-color: rgba(255,255,255,0.1);
+}
+#userInfo p {
+    position:relative;
+    left:.8em;
+    top:.8em;
+}
+
+#username{
+    width:330px;
+    height:50px;
+}
+
+#tagline{
+    height:110px;
+    width:330px;
+}
+
+@media(max-width:960px){
+    #profileillustaiton{
+        display:none;
+    }
+}
+

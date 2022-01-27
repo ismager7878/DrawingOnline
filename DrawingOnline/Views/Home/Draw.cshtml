@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@model DrawingOnline.Models.Drawing
 <link rel="stylesheet" href="https://use.typekit.net/tvs3mun.css">
 <link href="~/Content/Draw.css" rel="stylesheet" />
 <link href="~/Content/SiteWide.css" rel="stylesheet" />
@@ -10,21 +11,26 @@
     <header>
         <ul class="nav-list" id="coll">
             <li class="icon" id="icon-left" style="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-                    <path id="Path_5" data-name="Path 5" d="M29.331.021A10.646,10.646,0,0,1,37.183,2.8a10.762,10.762,0,0,1,2.8,7.872h0V29.33A10.745,10.745,0,0,1,37.2,37.2a10.693,10.693,0,0,1-7.872,2.777H10.67A10.664,10.664,0,0,1,2.8,37.2,10.663,10.663,0,0,1,.021,29.33h0V10.67A10.663,10.663,0,0,1,2.8,2.8,10.664,10.664,0,0,1,10.67.021H29.331Zm-.519,9.131a3.159,3.159,0,0,0-4.475,0h0L23,10.51a.531.531,0,0,0,0,.739l.109.108.491.489,1,.991L25.8,14.045c.252.253.419.423.433.441a1.353,1.353,0,0,1,.36.919,1.317,1.317,0,0,1-1.319,1.319,1.255,1.255,0,0,1-.879-.36h0l-3.337-3.317a.435.435,0,0,0-.6,0h0l-9.53,9.53a3.6,3.6,0,0,0-1.059,2.477h0l-.12,4.735a.934.934,0,0,0,.26.679.951.951,0,0,0,.679.28h4.7a3.7,3.7,0,0,0,2.577-1.059h0L31.408,16.2a3.171,3.171,0,0,0,0-4.455h0Z" transform="translate(0)" fill="#209bba" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                    <g id="Iconly_Bold_Edit" data-name="Iconly/Bold/Edit" transform="translate(-3 -3)">
+                        <g id="Edit" transform="translate(3 3)">
+                            <path id="Path_7" data-name="Path 7" d="M33.98,31.907a2.047,2.047,0,0,1,0,4.093H22.559a2.047,2.047,0,0,1,0-4.093H33.98ZM26.06,1.4l2.95,2.343a6.131,6.131,0,0,1,2.292,3.5,4.8,4.8,0,0,1-.976,4.085L12.753,34.056A4.209,4.209,0,0,1,9.484,35.69l-7,.086a.8.8,0,0,1-.785-.624L.1,28.251a4.265,4.265,0,0,1,.806-3.59L13.368,8.536a.626.626,0,0,1,.849-.108L19.459,12.6a1.693,1.693,0,0,0,1.295.365,1.89,1.89,0,0,0,1.634-2.085,2.1,2.1,0,0,0-.658-1.268L16.637,5.526a.757.757,0,0,1-.127-1.051l1.974-2.561C20.308-.429,23.492-.644,26.06,1.4Z" transform="translate(0 0)" fill="#209bba" />
+                        </g>
+                    </g>
                 </svg>
+
             </li>
             <li><a href="@Url.Action("Index","Home")"><h3>Home</h3></a></li>
             <li>
                 <a href="@Url.Action(
                             actionName: "Draw",
                             controllerName: "Home",
-                            routeValues: new RouteValueDictionary(new { edit = false }))"><h3>Draw</h3></a>
+                            routeValues: new RouteValueDictionary(new { edit = "false", remix = "false", remixId = "none", drawId = "none"}))"><h3 class="current-page">Draw</h3></a>
             </li>
             <li><a href="@Url.Action("MyDrawings","Home")"><h3>My Drawings</h3></a></li>
             <li><a href="@Url.Action("PublicDrawings","Home")"><h3>Public Drawings</h3></a></li>
             <li class="icon" id="icon-right">
-                <a href="@Url.Action("Profile","Home")">
+                <a class="menuIcon" href="@Url.Action("Profile","Home")">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
                         <g id="Iconly_Bold_Profile" data-name="Iconly/Bold/Profile" transform="translate(-4 -2)">
                             <g id="Profile" transform="translate(4 2)">
@@ -38,16 +44,22 @@
     </header>
 
     <content class="content">
+        <div id="smallTop">
 
-        <div id="menuIcon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="29.667" viewBox="0 0 43 29.667">
-                <g id="Icon_feather-menu" data-name="Icon feather-menu" transform="translate(-3 -7.5)">
-                    <path id="Path_13" data-name="Path 13" d="M4.5,18h40" transform="translate(0 4.333)" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-                    <path id="Path_14" data-name="Path 14" d="M4.5,9h40" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-                    <path id="Path_15" data-name="Path 15" d="M4.5,27h40" transform="translate(0 8.667)" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
-                </g>
-            </svg>
+            <div id="menuIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="43" height="29.667" viewBox="0 0 43 29.667">
+                    <g id="Icon_feather-menu" data-name="Icon feather-menu" transform="translate(-3 -7.5)">
+                        <path id="Path_13" data-name="Path 13" d="M4.5,18h40" transform="translate(0 4.333)" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                        <path id="Path_14" data-name="Path 14" d="M4.5,9h40" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                        <path id="Path_15" data-name="Path 15" d="M4.5,27h40" transform="translate(0 8.667)" fill="none" stroke="#209BBA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+                    </g>
+                </svg>
+            </div>
+            <div id="smallTitle">
+                <h3>Draw</h3>
+            </div>
         </div>
+        
         <div id="mainContent">
             <div id="drawBoard">
                 <canvas id="c"></canvas>
@@ -83,9 +95,20 @@
     <div id="addPopUp">
         <div id="popHeader">
             <h2>Save As</h2>
-            <svg id="exitPop" xmlns="http://www.w3.org/2000/svg" width="36" height="31.5" viewBox="0 0 36 31.5">
-                <path id="Icon_awesome-window-close" data-name="Icon awesome-window-close" d="M32.625,2.25H3.375A3.376,3.376,0,0,0,0,5.625v24.75A3.376,3.376,0,0,0,3.375,33.75h29.25A3.376,3.376,0,0,0,36,30.375V5.625A3.376,3.376,0,0,0,32.625,2.25ZM26.747,22.676a.866.866,0,0,1,0,1.223L23.9,26.747a.866.866,0,0,1-1.223,0L18,22.029l-4.676,4.718a.866.866,0,0,1-1.223,0L9.253,23.9a.866.866,0,0,1,0-1.223L13.971,18,9.253,13.324a.866.866,0,0,1,0-1.223L12.1,9.253a.866.866,0,0,1,1.223,0L18,13.971l4.676-4.718a.866.866,0,0,1,1.223,0L26.747,12.1a.866.866,0,0,1,0,1.223L22.029,18Z" transform="translate(0 -2.25)" fill="#209bba" />
-            </svg>
+
+            <div id="exitPop">
+                <svg id="Circle_Button_" data-name="Circle Button " xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <rect id="Area_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE2_" data-name="Area [SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE2]" width="48" height="48" rx="24" fill="rgba(255,255,255,0.15)" />
+                    <g id="Icon_" data-name="Icon " transform="translate(14 14)">
+                        <rect id="Area_ICON:feather_x_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE2_" data-name="Area [ICON:feather/x][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE2]" width="20" height="20" fill="rgba(99,226,209,0.27)" opacity="0" />
+                        <g id="Icon" transform="translate(-1 -1)">
+                            <line id="Line" x1="10" y2="10" transform="translate(6 6)" fill="none" stroke="#0082ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" />
+                            <line id="Line-2" data-name="Line" x2="10" y2="10" transform="translate(6 6)" fill="none" stroke="#0082ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
         </div>
         <div>
             <label for="nameIn">Name:</label>
@@ -101,44 +124,214 @@
 </div>
 
 <script src="~/Scripts/fabric.min.js"></script>
-<script src="~/Scripts/Draw.js"></script>
-<script src="~/Scripts/SiteWide.js"></script>
 <script src="~/Scripts/lzw_encoder.js"></script>
+<script>
+    ///<reference path="jquery-3.4.1.slim.js" />
+    console.log('hello');
+
+    var finalCanvas;
+
+    var colorPicker = document.getElementById('colorPicker')
+    var sizePicker = document.getElementById('sizePicker')
+    var sizeValue = document.getElementById('sizeValue')
+    var bColorPicker = document.getElementById('bColorPicker')
+    var remixed = @ViewBag.remix;
+    var edit = @ViewBag.edit;
+
+    var x = window.matchMedia("(max-width: 1124px)")
+    myFunction(x) // Call listener function at run time
+    x.addListener(myFunction)
+
+    function myFunction(x) {
+        var elements = document.getElementsByClassName('editBut');
+        if (x.matches) {
+            for (var i = 0; i < elements.length; i++) {
+                if (i == 0) {
+                    elements[i].style.width = '100%'
+                    console.log(elements[i].width);
+                } else {
+                    elements[i].style.width = '100%'
+                    console.log(elements[i].width);
+                }
+            }// If media query matches
+            console.log(elements[0].width);
+        } else {
+            for (var i = 0; i < elements.length; i++) {
+                if (i == 0) {
+                    elements[i].style.width = '80%'
+                    console.log(elements[i].width);
+                } else {
+                    elements[i].style.width = '30%'
+                    console.log(elements[i].width);
+                }
+            }
+
+        }
+    }
+     function initCanvas(id) {
+            return new fabric.Canvas(id, {
+                width: 750,
+                height: 750,
+                backgroundColor: 'white',
+
+            })
+
+        }
+
+    var exitPop = document.getElementById('exitPop');
+
+    exitPop.addEventListener('click', () => {
+        exitPop.parentElement.parentElement.style.display = 'none';
+    })
+
+    const modes = {
+        transform: 'transform',
+        drawing: 'drawing'
+    }
+
+    let currentMode
+
+
+    function setBackgroundColor() {
+        canvas.backgroundColor = bColorPicker.value
+        canvas.renderAll()
+    }
+
+    function setColor() {
+        var color = colorPicker.value;
+        console.log(color)
+        canvas.freeDrawingBrush.color = color;
+        canvas.renderAll();
+    }
+
+    function setBrushSize() {
+        var size = sizePicker.value
+        sizeValue.innerHTML = size;
+        canvas.freeDrawingBrush.width = size
+        canvas.renderAll();
+    }
+
+    function toggleMode() {
+        if (currentMode == modes.drawing) {
+            document.getElementById('toggleBut').innerHTML = 'Enable Drawing'
+            canvas.isDrawingMode = false;
+            currentMode = modes.transform
+            canvas.renderAll();
+        } else {
+            document.getElementById('toggleBut').innerHTML = 'Enable Transform'
+            canvas.freeDrawingBrush.color = colorPicker.value
+            canvas.freeDrawingBrush.width = sizePicker.value
+            currentMode = modes.drawing;
+            canvas.isDrawingMode = true;
+            canvas.renderAll();
+        }
+    }
+
+    function reloadCanvas(canvas) {
+        var bufferCanvas = JSON.stringify(canvas)
+        canvas.clear();
+        canvas.loadFromJSON(bufferCanvas);
+
+    }
+
+    function clearCanvas() {
+        canvas.clear();
+        setBackgroundColor();
+    }
+
+    function setEvents(canvas) {
+        canvas.on('mouse:move', (event) => {
+            if (mousePressed && currentMode == modes.drawing) {
+                console.log('drawing');
+            }
+        })
+        canvas.on('mouse:down', (event) => {
+            mousePressed = true;
+        })
+
+        canvas.on('mouse:up', (event) => {
+            mousePressed = false;
+            if (currentMode == modes.drawing)
+                reloadCanvas(canvas);
+            saveCanvas(canvas);
+        })
+
+    }
+
+    function checkForRemix(canvas) {
+        if (remixed || edit) {
+            var remix = '@Model.Canvas.Replace("\n", "").Replace("\r", "")'
+;
+            console.log(remix)
+            remix = lzw_decode(remix.replace(/&quot;/g, '"'))
+            console.log(remix)
+            canvas.loadFromJSON(remix);
+        }
+    }
+
+    const canvas = initCanvas('c');
+    checkForRemix(canvas);
+    sizeValue.innerHTML = '10'
+    bColorPicker.value = '#ffffff'
+    toggleMode(modes.drawing);
+    var mousePressed = false;
+    setEvents(canvas);
+
+
+
+    function saveCanvas(canvas) {
+        finalCanvas = {
+            canvas: canvas
+        }
+    }
+
+
+</script>
+<script src="~/Scripts/SiteWide.js"></script>
+
 <script type="text/javascript">
-    var loadedID;
-    var remixed;
+    var remixed = @ViewBag.remix;
     var remixedID;
+    if (remixed) {
+        remixedID = @ViewBag.remixId;
+    }
+
+    var edit = @ViewBag.edit;
+    var drawId
+    if (edit) {
+        drawId = @ViewBag.drawId;
+    }
+
+
     var popUpSave = document.getElementById('addPopUp')
 
     $(function () {
         $("#quickSave").click(function () {
-            var userDrawings = JSON.parse(@Html.Raw(Json.Encode(@ViewBag.Sider)));
-            console.log(userDrawings);
-            var update = false;
 
-            for (var i = 0; i < userDrawings.length; i++) {
-                if (userDrawings[i].ID == loadedID) {
-                    update = true;
-                    break;
-                }
-            }
+            if (edit) {
 
-            if (update) {
-                //        $.ajax({
-                //        type: "POST",
-                //        url: "/Home/UpdateLike",
-                //        data: JSON.stringify(randSite),
-                //        contentType: "application/json; charset=utf-8",
-                //        dataType: "json",
-                //        success: function (r) {
-                //        },
-                //        failure: function (response) {
-                //            alert(response.responseText);
-                //        },
-                //        error: function (response) {
-                //            alert(response.responseText);
-                //        }
-                //    });
+                var drawing = new Object();
+
+                drawing.ID = drawId
+                drawing.Canvas = lzw_encode(JSON.stringify(finalCanvas.canvas));
+                drawing.CanvasSVG = finalCanvas.canvas.toSVG()
+
+                        $.ajax({
+                        type: "POST",
+                            url: "/Home/UpdateDrawing",
+                            data: JSON.stringify(drawing),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                            success: function (r) {
+                                alert('Drawing Saved');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                });
             } else {
                 popUpSave.style.display = 'flex';
             }
@@ -150,7 +343,7 @@
 
         drawing.Name = $('#nameIn').val();
         console.log(JSON.stringify(finalCanvas.canvas))
-        console.log(lzw_encode(JSON.stringify(finalCanvas.canvas)))
+        console.log(JSON.stringify(finalCanvas.canvas))
         drawing.Canvas = lzw_encode(JSON.stringify(finalCanvas.canvas));
         drawing.Remixed = remixed
         drawing.RemixedID = remixedID

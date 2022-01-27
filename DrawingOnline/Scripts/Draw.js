@@ -51,17 +51,6 @@ const modes = {
     drawing: 'drawing'
 }
 
-function initCanvas(id) {
-    return new fabric.Canvas(id, {
-        width: 750,
-        height: 750,
-        backgroundColor: 'white',
-
-    })
-    sizeValue.innerHTML = '10'
-    bColorPicker.value = 'white'
-}
-
 let currentMode
 
 
@@ -134,6 +123,8 @@ function setEvents(canvas) {
 
 
 const canvas = initCanvas('c');
+sizeValue.innerHTML = '10'
+bColorPicker.value = 'white'
 toggleMode(modes.drawing); 
 var mousePressed = false;
 setEvents(canvas);
