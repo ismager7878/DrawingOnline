@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>teset</title>
+    <title>Profile</title>
     <link href="~/Content/SiteWide.css" rel="stylesheet" />
     <link href="~/Content/Profile.css" rel="stylesheet" />
 </head>
@@ -12,7 +13,7 @@
     @if (Model.user.Username == null)
     {
         <script>
-            
+
         window.location.href = "@Url.Action("Login","Home")";
         </script>
     }
@@ -109,7 +110,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div style="margin-top:20px;">
+                                <button onclick="signout()" style="font-size:20px; width:200px;">
+                                    Log out
+                                </button>
+                            </div>
 
                         </div>
                         <div id="profileillustaiton">
@@ -157,7 +162,28 @@
             </content>
         </div>
     }
+    <script>
+    function signout() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/SignOut",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                if (r == true) {
+                    window.location.href = "@Url.Action("Index","Home")";
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        })
+    }
 
+    </script>
     <script src="~/Scripts/SiteWide.js"></script>
 </body>
 </html>

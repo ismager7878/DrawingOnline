@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Draw";
 }
 @model DrawingOnline.Models.Drawing
 <link rel="stylesheet" href="https://use.typekit.net/tvs3mun.css">
@@ -65,6 +65,9 @@
                 <canvas id="c"></canvas>
             </div>
             <div>
+                <div style="margin-left: 20px">
+                    <h2 id="type"></h2>
+                </div>
                 <div id="tools">
                     <div id="canvasTools">
                         <div style="width:70%" class="editBut"><button onclick="toggleMode()" id="toggleBut">Enable Transform</button></div>
@@ -129,21 +132,24 @@
     ///<reference path="jquery-3.4.1.slim.js" />
     console.log('hello');
 
-    var finalCanvas;
+    var finalCanvas;//variable der senere blive lavet til en obejkt med custom properties som gør at vi kan hente vores canvas fra det script der sender til databasen;
 
     var colorPicker = document.getElementById('colorPicker')
     var sizePicker = document.getElementById('sizePicker')
     var sizeValue = document.getElementById('sizeValue')
     var bColorPicker = document.getElementById('bColorPicker')
-    var remixed = @ViewBag.remix;
-    var edit = @ViewBag.edit;
 
-    var x = window.matchMedia("(max-width: 1124px)")
-    myFunction(x) // Call listener function at run time
-    x.addListener(myFunction)
+    var remixed = @ViewBag.remix;//henter om den skal lave et remix
+    var edit = @ViewBag.edit;//henter om den skal lave et edit
 
-    function myFunction(x) {
+    //media queries til at holde styr på inline css
+    var x = window.matchMedia("(max-width: 1124px)")//opretter en media querie
+    qFunction(x)//kørefuntionen med Querie parameter
+    x.addListener(qFunction)//lytter efter qurien og ved ændring køre funktionen q function
+
+    function qFunction(x) {
         var elements = document.getElementsByClassName('editBut');
+        //basic if elese funtion der tjekker matches om querien er passer og ændre elementer der efter;
         if (x.matches) {
             for (var i = 0; i < elements.length; i++) {
                 if (i == 0) {
@@ -153,7 +159,7 @@
                     elements[i].style.width = '100%'
                     console.log(elements[i].width);
                 }
-            }// If media query matches
+            }
             console.log(elements[0].width);
         } else {
             for (var i = 0; i < elements.length; i++) {
@@ -168,23 +174,24 @@
 
         }
     }
+
+    // retunere en fabric.js canvas som jeg kan bruge til at tegne i og bliver oprettet ud det canvas id jeg har sendt med også sætter noget proberties på canvasen også
      function initCanvas(id) {
-            return new fabric.Canvas(id, {
+            return new fabric.Canvas(id, { 
                 width: 750,
                 height: 750,
                 backgroundColor: 'white',
-
             })
 
         }
 
-    var exitPop = document.getElementById('exitPop');
 
+    var exitPop = document.getElementById('exitPop');
     exitPop.addEventListener('click', () => {
         exitPop.parentElement.parentElement.style.display = 'none';
     })
 
-    const modes = {
+    const modes = {//opretter et objekt med properites for mode, så vi kan holde styr på hvilket mode vi med currentMode ved at sige henvise til modeobejktet istedet for at resikere stave fejl med strings
         transform: 'transform',
         drawing: 'drawing'
     }
@@ -211,26 +218,27 @@
         canvas.renderAll();
     }
 
-    function toggleMode() {
-        if (currentMode == modes.drawing) {
-            document.getElementById('toggleBut').innerHTML = 'Enable Drawing'
-            canvas.isDrawingMode = false;
+
+    function toggleMode() {//funktion der skrifter det mode vi er i 
+        if (currentMode == modes.drawing) {//tjekker for om vi er i drawingmode
+            document.getElementById('toggleBut').innerHTML = 'Enable Drawing' //skriver knappens indhold
+            canvas.isDrawingMode = false;//slår mode på canvasen fra(dette er en fabic.js properti)
             currentMode = modes.transform
-            canvas.renderAll();
-        } else {
+            canvas.renderAll();//re render canvas efter ændinger(dette er en fabric.js funktion)
+        } else {//hvis den ikke er i drawingmode
             document.getElementById('toggleBut').innerHTML = 'Enable Transform'
-            canvas.freeDrawingBrush.color = colorPicker.value
-            canvas.freeDrawingBrush.width = sizePicker.value
+            canvas.isDrawingMode = true;//slår freedrwaing til
+            canvas.freeDrawingBrush.color = colorPicker.value//sætter brush farven
+            canvas.freeDrawingBrush.width = sizePicker.value//sætter brush størrelse
             currentMode = modes.drawing;
-            canvas.isDrawingMode = true;
-            canvas.renderAll();
+            canvas.renderAll();//rendere efter ændrirnger
         }
     }
 
     function reloadCanvas(canvas) {
-        var bufferCanvas = JSON.stringify(canvas)
-        canvas.clear();
-        canvas.loadFromJSON(bufferCanvas);
+        var bufferCanvas = JSON.stringify(canvas)//gemmer canvasen som string til midlertidig funktion
+        canvas.clear();//fjerner alt i canvs
+        canvas.loadFromJSON(bufferCanvas);//indlæser canvasen igen
 
     }
 
@@ -240,44 +248,23 @@
     }
 
     function setEvents(canvas) {
-        canvas.on('mouse:move', (event) => {
-            if (mousePressed && currentMode == modes.drawing) {
-                console.log('drawing');
-            }
-        })
-        canvas.on('mouse:down', (event) => {
-            mousePressed = true;
-        })
+        //tjeker for om musseknappen bliver løftet
+        canvas.on('mouse:up', () => {
+            if (currentMode == modes.drawing)//hvis den er i drawing mode
+                reloadCanvas(canvas);//reloader min canvas da dette fikser fejl i fabric.js som offsætter det man tenger efter man har ændre brush size en gang
 
-        canvas.on('mouse:up', (event) => {
-            mousePressed = false;
-            if (currentMode == modes.drawing)
-                reloadCanvas(canvas);
-            saveCanvas(canvas);
+            saveCanvas(canvas);//gemmer canvas til mit finalcanvs objekt(se canvas funktion)
         })
 
     }
-
-    function checkForRemix(canvas) {
-        if (remixed || edit) {
-            var remix = '@Model.Canvas.Replace("\n", "").Replace("\r", "")'
-;
-            console.log(remix)
-            remix = lzw_decode(remix.replace(/&quot;/g, '"'))
-            console.log(remix)
-            canvas.loadFromJSON(remix);
+    
+    function checkForRemixOrEdit(canvas) {
+        if (remixed || edit) {//tjekker for om remixed eller edit er true, da dette vil betyde at den skal loade den canvas den har fået sendt med fra homecontrolleren
+            var newC = '@Model.Canvas.Replace("\n", "").Replace("\r", "")'//henter canvasen fra homcontrolleren, sikre sig at der ikke er nogle linje skift i stringen 
+            newC = lzw_decode(newC.replace(/&quot;/g, '"'))//decoder canvas stringen tilbage til den normale format, og derud over også fjerne en formerings fejl der har opstået i den stringen
+            canvas.loadFromJSON(newC);//loader canvasen fra homecontrolleren ind på vores nyværende canvas
         }
     }
-
-    const canvas = initCanvas('c');
-    checkForRemix(canvas);
-    sizeValue.innerHTML = '10'
-    bColorPicker.value = '#ffffff'
-    toggleMode(modes.drawing);
-    var mousePressed = false;
-    setEvents(canvas);
-
-
 
     function saveCanvas(canvas) {
         finalCanvas = {
@@ -285,8 +272,16 @@
         }
     }
 
-
+    //Rækkefølgen for canvas initering og håndtering
+    const canvas = initCanvas('c');//opretter min fabric canvas med egen funtion
+    checkForRemixOrEdit(canvas);//checker om det er et edit eller remix da dette betyder den skal loade noget ind på canvasen
+    sizeValue.innerHTML = '10'//sætter tool værdiger
+    bColorPicker.value = '#ffffff'
+    toggleMode();//Slår drawmode til på canvas
+    setEvents(canvas);//Sætter events den skal lytte efter på canvasen
 </script>
+
+
 <script src="~/Scripts/SiteWide.js"></script>
 
 <script type="text/javascript">
@@ -302,6 +297,14 @@
         drawId = @ViewBag.drawId;
     }
 
+    var type = document.getElementById('type')
+    if (edit == true) {
+        type.innerHTML = 'Edit'
+    } else if (remixed == true) {
+        type.innerHTML = 'Remix'
+    } else {
+        type.innerHTML = 'New Drawing'
+    }
 
     var popUpSave = document.getElementById('addPopUp')
 

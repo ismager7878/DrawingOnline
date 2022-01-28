@@ -70,6 +70,20 @@ a {
         color: white;
     }
 
+#setUpInfo input[type=password] {
+    border: none;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 0;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+    #setUpInfo input[type=password]::placeholder {
+        color: white;
+    }
+
 #setUpInfo button {
     height: 48px;
 }

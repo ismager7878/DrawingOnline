@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>teset</title>
+    <title>Public Drawings</title>
     <link href="~/Content/SiteWide.css" rel="stylesheet" />
     <link href="~/Content/PublicDrawings.css" rel="stylesheet" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -65,38 +68,38 @@
                 {
                     foreach (var item in Model.publicDrawings)
                     {
-                <a class="elementButton" href="@Url.Action(
+                        <a class="elementButton" href="@Url.Action(
                             actionName: "Draw",
                             controllerName: "Home",
-                            routeValues: new RouteValueDictionary(new { 
-                                edit = "false", 
-                                remix = "true", 
+                            routeValues: new RouteValueDictionary(new {
+                                edit = "false",
+                                remix = "true",
                                 remixId = item.ID.ToString(),
                                 drawId = "none",
                             }));;">
-                    <div class="drawingElement">
-                        @item.CanvasSVG
+                            <div class="drawingElement">
+                                @item.CanvasSVG
 
-                    </div>
-                    <div class="bottomOverlay">
-                        <div>
-                            <strong>Name:</strong> @item.Name
+                            </div>
+                            <div class="bottomOverlay">
+                                <div>
+                                    <strong>Name:</strong> @item.Name
 
-                        </div>
-                        <div id="center">
-                            <strong>User:</strong> @Model.users.Where(x => x.ID == item.UserID).FirstOrDefault().Username
-                        </div>
-                        <div id="right">
-                            @if (item.Remixed)
-                            {
-                                <strong>Remix of: </strong><strong>@Model.publicDrawings.Where(x => x.ID == item.RemixedID).FirstOrDefault().Name</strong>
+                                </div>
+                                <div id="center">
+                                    <strong>User:</strong> @Model.users.Where(x => x.ID == item.UserID).FirstOrDefault().Username
+                                </div>
+                                <div id="right">
+                                    @if (item.Remixed)
+                                    {
+                                        <strong>Remix of: </strong><strong>@Model.publicDrawings.Where(x => x.ID == item.RemixedID).FirstOrDefault().Name</strong>
 
-                            }
-                        </div>
+                                    }
+                                </div>
 
-                        </div>
-                    
-                </a>
+                            </div>
+
+                        </a>
                     }
                 }
             </div>

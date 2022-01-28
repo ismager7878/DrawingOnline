@@ -106,6 +106,9 @@
             transform: scale(1.05);
             opacity: .8;
         }
+    #type{
+        display:block
+    }
 @media(max-width: 1124px){
     #mainContent {
         display: flex;
@@ -137,6 +140,10 @@
     #tools{
         gap:1em;
         height:max-content;
+    }
+    #type{
+        display:flex;
+        justify-content:center;
     }
 }
    

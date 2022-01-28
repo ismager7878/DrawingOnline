@@ -13,33 +13,32 @@ namespace DrawingOnline.Controllers
 {
     public class HomeController : Controller
     {
-        public int userID = 2;
-        List<Drawing> userDrawings = new List<Drawing>();
-        
+        public int getUserCookie()
+        {
+            if (HttpContext.Request.Cookies.AllKeys.Contains("user"))
+            {
+                return Convert.ToInt32(Request.Cookies["user"].Value);
+            }
+            else
+            {
+                HttpCookie UserCookie = new HttpCookie("user", "1");
+                UserCookie.Expires.AddDays(1);
+                HttpContext.Response.SetCookie(UserCookie);
+                return Convert.ToInt32(Request.Cookies["user"].Value);
+            }
+        }
         public ActionResult Index()
         {
             IndexViewModel indexViewModel = new IndexViewModel();
-            indexViewModel.userID = userID; 
+
+            indexViewModel.userID = getUserCookie();
             return View(indexViewModel);
         }
 
         
         public ActionResult Draw( string edit, string remix, string drawId, string remixId)
         {
-            using (DrawingOnlineEntities entitet = new DrawingOnlineEntities())
-            {
-                userDrawings = entitet.Drawings.Where(x => x.UserID == userID).ToList();
-                List<UserDrawingClass> userDrawingsClass = userDrawings.Select(x => new UserDrawingClass
-                {
-                    ID = x.ID,
-                    Name = x.Name,
-                    Canvas = x.Canvas,
-                    Remixed = x.Remixed,
-                    RemixedID = x.RemixedID,
-                    UserID = x.UserID,
-                    Publicity = x.Publicity
-                }).ToList();
-            }
+            
             ViewBag.edit = edit; 
             ViewBag.drawId = drawId;
             ViewBag.remix = remix;
@@ -67,6 +66,7 @@ namespace DrawingOnline.Controllers
         }
         public ActionResult AddDrawing(UserDrawingClass drawing)
         {
+            int userID = getUserCookie();
             Drawing nr = new Drawing();
             nr.Name = drawing.Name;
             nr.Canvas = drawing.Canvas;
@@ -101,6 +101,8 @@ namespace DrawingOnline.Controllers
         }
         public ActionResult Profile()
         {
+            int userID = getUserCookie();
+
             ProfileViewModel profileViewModel = new ProfileViewModel();
             profileViewModel.user = new UserModelClass();
             if(userID != 1)
@@ -190,7 +192,10 @@ namespace DrawingOnline.Controllers
                 {
                     if(userMatch.Password == user.Password)
                     {
-                        userID = userMatch.ID;
+                        HttpCookie UserCookie = new HttpCookie("user", userMatch.ID.ToString());
+                        UserCookie.Expires.AddDays(1);
+                        HttpContext.Response.SetCookie(UserCookie);
+
                         return Json(true);
                     }
                     else
@@ -206,8 +211,17 @@ namespace DrawingOnline.Controllers
 
             
         }
+        public ActionResult SignOut()
+        {
+            HttpCookie UserCookie = new HttpCookie("user", "1");
+            UserCookie.Expires.AddDays(1);
+            HttpContext.Response.SetCookie(UserCookie);
+            return Json(true);
+        }
         public ActionResult MyDrawings()
         {
+            int userID = getUserCookie();
+
             MyDrawingsViewModel myDrawingsViewModel = new MyDrawingsViewModel();
             myDrawingsViewModel.user = new UserModelClass();
             if (userID != 1)
